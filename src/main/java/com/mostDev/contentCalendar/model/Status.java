@@ -3,6 +3,6 @@ package com.mostDev.contentCalendar.model;
 public enum Status {
     IDEA,
     IN_PROGRESS,
-    COMPELETED,
+    COMPLETED,
     PUBLISHED
 }

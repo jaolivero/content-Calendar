@@ -1,28 +1,24 @@
 package com.mostDev.contentCalendar.controller;
 
 import com.mostDev.contentCalendar.model.Content;
-import com.mostDev.contentCalendar.model.Status;
-import com.mostDev.contentCalendar.model.Type;
+
 import com.mostDev.contentCalendar.repository.ContentCollectionRepository;
-import jakarta.annotation.PostConstruct;
+import com.mostDev.contentCalendar.repository.ContentRepository;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/api/content")
 public class ContentController {
 
+    //private final ContentCollectionRepository repository;
+    private final ContentRepository repository;
 
-    private final ContentCollectionRepository repository;
-
-
-    public ContentController(ContentCollectionRepository repository) {
+    public ContentController(ContentRepository repository) {
         this.repository = repository;
     }
 
@@ -42,10 +38,11 @@ public class ContentController {
         repository.save(content);
     }
 
+
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/{id}")
     public void update(@RequestBody Content content, @PathVariable Integer id) {
-        if(!repository.existById(id)) {
+        if(!repository.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Content not found");
         }
         else {
