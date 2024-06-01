@@ -1,19 +1,19 @@
 package com.mostDev.contentCalendar;
 
+import com.mostDev.contentCalendar.config.ContentCalendarProperties;
 import com.mostDev.contentCalendar.model.Content;
 import com.mostDev.contentCalendar.model.Status;
 import com.mostDev.contentCalendar.model.Type;
-import com.mostDev.contentCalendar.model.User;
 import com.mostDev.contentCalendar.repository.ContentRepository;
-import com.mostDev.contentCalendar.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-
 import java.time.LocalDateTime;
 
 @SpringBootApplication
+@EnableConfigurationProperties(ContentCalendarProperties.class)
 public class ContentCalendarApplication {
 
 	public static void main(String[] args) {
@@ -22,7 +22,7 @@ public class ContentCalendarApplication {
 	}
 
 	@Bean
-	CommandLineRunner commandLineRunner(ContentRepository repository, UserRepository userRepo) {
+	CommandLineRunner commandLineRunner(ContentRepository repository) {
 		return args -> {
 
 			Content content = new Content (
@@ -36,13 +36,9 @@ public class ContentCalendarApplication {
 			        ""
 			);
 
-			User elijah = new User(
-					null,
-					"eli11",
-					"abc123"
-			);
 
-			//userRepo.save(elijah);
+
+
 			repository.save(content);
 
 		};

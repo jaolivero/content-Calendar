@@ -6,7 +6,6 @@ import com.mostDev.contentCalendar.model.Type;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Repository;
 
-import javax.swing.text.html.Option;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
